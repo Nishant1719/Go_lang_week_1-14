@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 // func buy(total int, userInput int) {
@@ -49,7 +50,10 @@ func main() {
 
 	println("Enter the tickets")
 	fmt.Scan(&userTickets)
-
+	// Validate the inputs
+	if userTickets > remainingTickets {
+		fmt.Println("Invalid Input")
+	}
 	remainingTickets = remainingTickets - userTickets
 	fmt.Printf("User %v booked this many tickets %v\n", userName, userTickets)
 	fmt.Printf("Type of conferencename : %T, and Type of conferenceTickets %T\n", conferenceName, conferenceTickets)
@@ -69,6 +73,7 @@ func main() {
 	// ----------------------------------------------------------------------
 	// Array And slices
 	// var bookings [50]string // Declaration
+	// bookings = append(bookings, "Nishant")  // Wrong
 	// bookings[0] = userName
 	// bookings[1] = "waghade"
 	// fmt.Println("Booking done by all", bookings)
@@ -80,11 +85,60 @@ func main() {
 	var bookings []string
 	bookings = append(bookings, "Nishant")
 	bookings = append(bookings, "Waghade")
-
-	fmt.Printf("Booking type %T and Booking : %v", bookings, bookings)
+	bookings = append(bookings, userName)
+	// fmt.Printf("Booking type %T and Booking : %v\n", bookings, bookings)
 	//Alternative syntax for creating slices
 	// bookingt := []int{}
 	// var bookingt = []int{}
 	// print(bookingt)
+	// To print everything just print the array or the slice
+	// fmt.Printf("Printing everything %v", bookings)
 
+	// Loops
+	// for {
+	// For infinie loops - press ctrl + c
+	// 	fmt.Println("Enter again")
+	// 	fmt.Scan(&userName)
+	// 	bookings = append(bookings, userName)
+	// 	fmt.Println(bookings)
+	// }
+
+	// for index, ele := range bookings {
+	// 	fmt.Println(index)
+	// 	fmt.Println(ele)
+	// }
+
+	for _, ele := range bookings { // underscore is a ignored variable
+		preNames := "Sir"
+		bookings = append(bookings, ele+" "+preNames)
+		// fmt.Println(bookings)
+		// Output
+		// [Nishant Waghade nish Nishant Sir]
+		// [Nishant Waghade nish Nishant Sir Waghade Sir]
+		// [Nishant Waghade nish Nishant Sir Waghade Sir nish Sir]
+	}
+	fmt.Println(bookings)
+	onlyNames := []string{}
+	for _, ele := range bookings {
+		// Expected output remove Sir from everything as just 3 elements at the end have combined names with space.
+		removeNames := strings.Fields(ele)
+		onlyNames = append(onlyNames, removeNames[0])
+	}
+
+	fmt.Printf("No sir in the list %v\n", onlyNames)
+
+	// Conditionals
+	if len(onlyNames) > 10 {
+		fmt.Println("Yes it is greater than 10")
+	} else if len(onlyNames) < 10 {
+		fmt.Println("Yes it is lower than 10")
+	} else {
+		fmt.Println("Invalid")
+	}
+	addCheezWithNames(bookings)
+}
+
+func addCheezWithNames(bookingSlice []string) {
+	bookingSlice = append(bookingSlice, "Cheeze")
+	fmt.Println(bookingSlice)
 }

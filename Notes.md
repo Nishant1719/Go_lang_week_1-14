@@ -102,3 +102,52 @@
     go function_name(parameters)  // Creating a goroutine
     channel_name := make(chan data_type)  // Creating a channel
 
+# loops:
+- for loop is the only loop construct in Go.
+- Syntax :
+    for initialization; condition; post {
+        // code to be executed
+    }
+    - e.g. :
+        for i := 0; i < 10; i++ {
+            fmt.Println(i)
+        }
+    - for range loop : used to iterate over elements in arrays, slices, maps, or strings.
+        - Syntax :
+            for index, value := range collection {
+                // code to be executed
+            }
+        - e.g. :
+            for index, value := range mySlice {
+                fmt.Println("Index:", index, "Value:", value)
+            }
+# Conditionals:
+- Go provides conditional statements using 'if', 'else if', and 'else' keywords.
+- Syntax :
+    if condition {
+        // code to be executed if condition is true
+    } else if another_condition {
+        // code to be executed if another_condition is true
+    } else {
+        // code to be executed if none of the above conditions are true
+    }
+- e.g. :
+    if age < 18 {
+        fmt.Println("Minor")
+    } else if age >= 18 && age < 65 {
+        fmt.Println("Adult")
+    } else {
+        fmt.Println("Senior")
+    }
+    
+# Switch Statement:
+- The switch statement is used to select one of many code blocks to be executed.
+- Syntax :
+    switch expression {
+    case value1:
+        // code to be executed if expression == value1
+    case value2:
+        // code to be executed if expression == value2
+    default:
+        // code to be executed if expression doesn't match any case
+    }
