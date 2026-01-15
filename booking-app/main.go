@@ -3,13 +3,22 @@ package main
 import (
 	"booking-app/helper"
 	"fmt"
+	"strconv"
 	"strings"
+	"time"
 )
 
 // func buy(total int, userInput int) {
 // 	total = total - userInput
 // 	fmt.Println("In func total")
 // }
+
+type UserData struct {
+	firstname   string
+	lastname    string
+	age         uint
+	boolExample bool
+}
 
 func main() {
 
@@ -140,9 +149,60 @@ func main() {
 	TestingPackages() // calling from another file with same package have run all the files together.
 	//  go run main.go mainPackageExample.go or go run . with dot
 	helper.TestingHelperPackage()
+
+	//Declaration of a map:
+	// var mapExample map[string]string
+	// In Go, maps must be initialized before you can add values to them.
+	// mapExample := make(map[string]string) // This or
+	var mapExample = make(map[string]string) // This
+	mapExample["Firstname"] = userName
+	mapExample["Lastname"] = "Waghade"
+	mapExample["Age"] = strconv.FormatUint(uint64(remainingTickets), 10)
+	//Maps don't have a guaranteed order - each time you print a map, the key-value pairs might appear in a different sequence.
+	fmt.Println(mapExample)
+
+	//Stuct - mixed datatypes
+	//Struct considered as lightweight classes but doesnt support inheritance
+
+	var shName string
+	var shLName string
+	var age uint
+	totalinfo := make([]UserData, 0)
+
+	for i := 0; i < 3; i++ {
+		fmt.Println("FName")
+		fmt.Scan(&shName)
+
+		fmt.Println("LName")
+		fmt.Scan(&shLName)
+
+		fmt.Println("Age")
+		fmt.Scan(&age)
+
+		userInfo := UserData{
+			firstname:   shName,
+			lastname:    shLName,
+			age:         age,
+			boolExample: true,
+		}
+		totalinfo = append(totalinfo, userInfo)
+
+		//Using concurrency in go
+		//Creating a func call here which sleeps for 10 secs and prints some data.
+		// sleepingFunc(userInfo) // THis is interrupting the flow as its in the single thread
+		go sleepingFunc(userInfo) //just add go infront of the func.
+
+	}
+	fmt.Println(totalinfo)
+
 }
 
 func addCheezWithNames(bookingSlice []string) {
 	bookingSlice = append(bookingSlice, "Cheeze")
 	fmt.Println(bookingSlice)
+}
+
+func sleepingFunc(userInfo UserData) {
+	time.Sleep(10 * time.Second)
+	fmt.Printf("Sending Email to: %s %s\n", userInfo.firstname, userInfo.lastname)
 }

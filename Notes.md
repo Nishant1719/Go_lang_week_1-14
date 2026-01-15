@@ -151,3 +151,15 @@
     default:
         // code to be executed if expression doesn't match any case
     }
+
+# type :
+- The 'type' keyword is used to define new types in Go.
+- You can define custom types based on existing types or create new struct types.
+- Syntax :
+    type new_type_name existing_type
+    type struct_name struct {
+        field1 data_type
+        field2 data_type
+    }
+- e.g. :
+    type Age int    
