@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -19,6 +20,9 @@ type UserData struct {
 	age         uint
 	boolExample bool
 }
+
+// wg.add(1), wg.wait(), wg.done()
+var wg sync.WaitGroup
 
 func main() {
 
@@ -190,11 +194,15 @@ func main() {
 		//Using concurrency in go
 		//Creating a func call here which sleeps for 10 secs and prints some data.
 		// sleepingFunc(userInfo) // THis is interrupting the flow as its in the single thread
+		wg.Add(1)
 		go sleepingFunc(userInfo) //just add go infront of the func.
-
+		//but if the loop gets exited and in less the 10 seconds the sleep func wont work
+		//This is a problem we need to solve
+		// if the main tread is done the application is done its doenst not wait for other sub threads
+		// for that we use WaitGroup
 	}
 	fmt.Println(totalinfo)
-
+	wg.Wait()
 }
 
 func addCheezWithNames(bookingSlice []string) {
@@ -205,4 +213,5 @@ func addCheezWithNames(bookingSlice []string) {
 func sleepingFunc(userInfo UserData) {
 	time.Sleep(10 * time.Second)
 	fmt.Printf("Sending Email to: %s %s\n", userInfo.firstname, userInfo.lastname)
+	wg.Done()
 }

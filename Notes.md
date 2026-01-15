@@ -163,3 +163,19 @@
     }
 - e.g. :
     type Age int    
+
+# WaitGroups:
+- A WaitGroup is a synchronization primitive in Go that is used to wait for a collection of goroutines to finish executing.
+- WaitGroups are part of the 'sync' package.
+- You can use a WaitGroup to ensure that your main program waits for all goroutines to complete before exiting.
+- Syntax :
+    var wg sync.WaitGroup  // Declare a WaitGroup
+
+    wg.Add(n)  // Add n goroutines to the WaitGroup
+
+    go func() {
+        defer wg.Done()  // Decrement the WaitGroup counter when the goroutine completes
+        // Goroutine code here
+    }()
+
+    wg.Wait()  // Block until all goroutines have completed
