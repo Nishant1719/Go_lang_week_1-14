@@ -1,6 +1,7 @@
 package main
 
 import (
+	"booking-app/helper"
 	"fmt"
 	"strings"
 )
@@ -136,6 +137,9 @@ func main() {
 		fmt.Println("Invalid")
 	}
 	addCheezWithNames(bookings)
+	TestingPackages() // calling from another file with same package have run all the files together.
+	//  go run main.go mainPackageExample.go or go run . with dot
+	helper.TestingHelperPackage()
 }
 
 func addCheezWithNames(bookingSlice []string) {
