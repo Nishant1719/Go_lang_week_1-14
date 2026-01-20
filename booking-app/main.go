@@ -2,6 +2,7 @@ package main
 
 import (
 	"booking-app/helper"
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
@@ -200,8 +201,17 @@ func main() {
 		//This is a problem we need to solve
 		// if the main tread is done the application is done its doenst not wait for other sub threads
 		// for that we use WaitGroup
+
 	}
 	fmt.Println(totalinfo)
+
+	// Error Handling
+	result, err := testingError(21)
+	if err != nil {
+		fmt.Println("Please give value lower than 20")
+	}
+	fmt.Println(result)
+
 	wg.Wait()
 }
 
@@ -214,4 +224,11 @@ func sleepingFunc(userInfo UserData) {
 	time.Sleep(10 * time.Second)
 	fmt.Printf("Sending Email to: %s %s\n", userInfo.firstname, userInfo.lastname)
 	wg.Done()
+}
+
+func testingError(num int) (string, error) {
+	if num > 20 {
+		return "", errors.New("Error Created!")
+	}
+	return "Success", nil
 }

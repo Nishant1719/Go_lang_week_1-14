@@ -91,6 +91,11 @@
     if err != nil {
         // Handle the error
     }
+- import "errors" package to create custom error messages.
+e.g. :
+    if age < 0 {
+        return errors.New("Age cannot be negative")
+    }
 
 # Concurrency:
 - Go has built-in support for concurrency through goroutines and channels.
