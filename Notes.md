@@ -184,3 +184,5 @@ e.g. :
     }()
 
     wg.Wait()  // Block until all goroutines have completed
+
+In Golang's Gin web framework, gin.H is a type alias for map[string]interface{}. It is a convenient way to represent JSON data or other key-value pairs, particularly when returning JSON responses from your API endpoints.
